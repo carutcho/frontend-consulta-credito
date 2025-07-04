@@ -1,0 +1,11 @@
+# Ignore dependências locais
+node_modules
+
+# Pasta de build Angular
+dist
+
+# Logs, caches e configs de IDE
+npm-debug.log*
+yarn-debug.log*
+.idea
+.vscode

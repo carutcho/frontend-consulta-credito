@@ -1,0 +1,61 @@
+<div class="container my-4">
+  <h2 class="mb-4">Consulta de Créditos</h2>
+
+  <div class="row">
+    <!-- Busca por NFS-e -->
+    <div class="col-md-6 mb-3">
+      <label for="nfse">Número da NFS-e</label>
+      <div class="input-group">
+        <input id="nfse" class="form-control" [(ngModel)]="nfse" placeholder="Ex: 7891011">
+        <button class="btn btn-primary" (click)="onBuscarPorNfse()">Buscar</button>
+      </div>
+    </div>
+
+    <!-- Busca por Número de Crédito -->
+    <div class="col-md-6 mb-3">
+      <label for="numero">Número do Crédito</label>
+      <div class="input-group">
+        <input id="numero" class="form-control" [(ngModel)]="numero" placeholder="Ex: 123456">
+        <button class="btn btn-primary" (click)="onBuscarPorNumero()">Buscar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mensagem de erro / não encontrado -->
+  <div *ngIf="error" class="alert alert-warning">
+    {{ error }}
+  </div>
+
+  <!-- Tabela de resultados (NFSe) -->
+  <table *ngIf="resultados.length" class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th>Crédito</th>
+        <th>NFS-e</th>
+        <th>Data</th>
+        <th>Valor ISSQN</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let c of resultados">
+        <td>{{ c.numeroCredito }}</td>
+        <td>{{ c.numeroNfse }}</td>
+        <td>{{ c.dataConstituicao }}</td>
+        <td>{{ c.valorIssqn | currency:'BRL' }}</td>
+        <td>{{ c.tipoCredito }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Card de resultado único (Número de Crédito) -->
+  <div *ngIf="resultadoUnico" class="card mt-4">
+    <div class="card-body">
+      <h5>Detalhes do Crédito {{ resultadoUnico.numeroCredito }}</h5>
+      <p><strong>NFS-e:</strong> {{ resultadoUnico.numeroNfse }}</p>
+      <p><strong>Data:</strong> {{ resultadoUnico.dataConstituicao }}</p>
+      <p><strong>Valor ISSQN:</strong> {{ resultadoUnico.valorIssqn | currency:'BRL' }}</p>
+      <p><strong>Tipo:</strong> {{ resultadoUnico.tipoCredito }}</p>
+    </div>
+  </div>
+</div>
